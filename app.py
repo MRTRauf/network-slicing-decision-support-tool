@@ -27,25 +27,55 @@ st.divider()
 #Input
 st.header("Input QoS")
 
-packet_delay = st.number_input(
+if "packet_delay" not in st.session_state:
+    st.session_state.packet_delay = 50
+
+#slider
+st.session_state.packet_delay = st.slider(
     "Packet Delay (ms)",
     min_value=0,
     max_value=300,
-    value=50,
-    step=1,
-    help="End-to-end packet delay in milliseconds. Low values indicate latency-critical services."
+    value=st.session_state.packet_delay,
+    step=1
 )
 
+#numeric input
+st.session_state.packet_delay = st.number_input(
+    "Packet Delay (ms) – precise",
+    min_value=0,
+    max_value=300,
+    value=st.session_state.packet_delay,
+    step=1
+)
 
-packet_loss = st.number_input(
-    "Packet Loss Rate",
+packet_delay = st.session_state.packet_delay
+
+
+if "packet_loss" not in st.session_state:
+    st.session_state.packet_loss = 0.001
+
+#slider
+st.session_state.packet_loss = st.slider(
+    "Packet Loss Rate (coarse)",
     min_value=0.0,
     max_value=0.01,
-    value=0.001,
-    step=0.00001,
-    format="%.5f",
-    help="Packet loss ratio (0–1%). Smaller values indicate higher reliability requirements."
+    value=st.session_state.packet_loss,
+    step=0.0001,
+    format="%.4f"
 )
+
+#numeric
+st.session_state.packet_loss = st.number_input(
+    "Packet Loss Rate (precise)",
+    min_value=0.0,
+    max_value=0.01,
+    value=st.session_state.packet_loss,
+    step=0.00001,
+    format="%.5f"
+)
+
+packet_loss = st.session_state.packet_loss
+
 
 
 st.caption("QoS inputs are limited to realistic SLA ranges used during model training.")
