@@ -10,6 +10,14 @@ validated and explained using machine learning.
 
 ---
 
+## Live Demo
+
+The application is deployed and accessible at:
+
+https://network-slicing-rauf.streamlit.app/
+
+---
+
 ## Overview
 
 The tool takes a set of network and service parameters as input and produces
