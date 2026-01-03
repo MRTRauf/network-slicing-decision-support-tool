@@ -27,22 +27,26 @@ st.divider()
 #Input
 st.header("Input QoS")
 
-packet_delay = st.slider(
+packet_delay = st.number_input(
     "Packet Delay (ms)",
     min_value=0,
     max_value=300,
     value=50,
-    step=1
+    step=1,
+    help="End-to-end packet delay in milliseconds. Low values indicate latency-critical services."
 )
 
-packet_loss = st.slider(
+
+packet_loss = st.number_input(
     "Packet Loss Rate",
     min_value=0.0,
     max_value=0.01,
     value=0.001,
-    step=0.0001,
-    format="%.4f"
+    step=0.00001,
+    format="%.5f",
+    help="Packet loss ratio (0–1%). Smaller values indicate higher reliability requirements."
 )
+
 
 st.caption("QoS inputs are limited to realistic SLA ranges used during model training.")
 
